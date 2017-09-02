@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
 
 repositories {
     mavenCentral()
@@ -31,6 +32,8 @@ android {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "com.google.dagger:dagger:2.11"
+    kapt "com.google.dagger:dagger-compiler:2.11"
 
     compile "com.android.support:appcompat-v7:25.3.1"
     compile "com.android.support.constraint:constraint-layout:1.0.2"
