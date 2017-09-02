@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="bill.kanban.MainActivityFragment"
-    tools:showIn="@layout/activity_main">
+    tools:context="bill.kanban.home.HomeFragment"
+    tools:showIn="@layout/main_core">
 
     <TextView
         android:layout_width="wrap_content"
