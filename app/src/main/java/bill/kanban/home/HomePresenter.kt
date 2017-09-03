@@ -1,10 +1,11 @@
 package bill.kanban.home
 
+import bill.kanban.common.Presenter
 import javax.inject.Inject
 
-class HomePresenter @Inject constructor(private val view: HomeView) {
+class HomePresenter @Inject constructor(private val view: HomeView) : Presenter {
 
-    fun onViewReady() {
+    override fun onViewReady() {
         view.render(HomeViewState.Ready("Hello from Presenter!"))
     }
 }
