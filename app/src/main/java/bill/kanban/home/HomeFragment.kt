@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import bill.kanban.R
 import bill.kanban.common.BaseFragment
+import kotlinx.android.synthetic.main.home_card.view.*
 import kotlinx.android.synthetic.main.home_core.*
 import javax.inject.Inject
 
@@ -26,6 +27,21 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeView {
 
     override fun render(viewState: HomeViewState) =
             when (viewState) {
-                is HomeViewState.Ready -> this.message.text = viewState.message
+                is HomeViewState.Ready -> renderReady(viewState)
+            }
+
+    private fun renderReady(viewState: HomeViewState.Ready) {
+        todoContainer.removeAllViews()
+        doingContainer.removeAllViews()
+        doneContainer.removeAllViews()
+
+        viewState.todo.map { toLayout(it, todoContainer) }.forEach { todoContainer.addView(it) }
+        viewState.doing.map { toLayout(it, doingContainer) }.forEach { doingContainer.addView(it) }
+        viewState.done.map { toLayout(it, doneContainer) }.forEach { doneContainer.addView(it) }
+    }
+
+    private fun toLayout(card: KanbanCard, container: ViewGroup) =
+            LayoutInflater.from(context).inflate(R.layout.home_card, container, false).apply {
+                title.text = card.title
             }
 }

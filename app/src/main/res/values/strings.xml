@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">KanbanLite</string>
     <string name="action_settings">Settings</string>
+    <string name="status_todo">To Do</string>
+    <string name="status_doing">Doing</string>
+    <string name="status_done">Done</string>
 </resources>
