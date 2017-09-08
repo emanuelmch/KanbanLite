@@ -1,5 +1,6 @@
 package bill.kanban.home
 
+import bill.kanban.atomic.AtomicView
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -21,5 +22,5 @@ interface HomeComponent {
 @Module
 class HomeModule(private val fragment: HomeFragment) {
     @Provides
-    fun provideHomeView(): HomeView = fragment
+    fun provideHomeView(): AtomicView<HomeAtom> = fragment
 }
