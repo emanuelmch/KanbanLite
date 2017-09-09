@@ -7,15 +7,13 @@ import javax.inject.Inject
 class HomePresenter @Inject constructor(private val view: AtomicView<HomeAtom>) : AtomicPresenter<HomeAtom> {
 
     override fun onViewReady() {
-        val todo = listOf(KanbanCard("To Do 1"), KanbanCard("To Do 2"))
-        val doing = listOf(KanbanCard("Doing 1"))
-        val done = listOf(KanbanCard("Done 1"), KanbanCard("Done 2"), KanbanCard("Done 3"))
-        view.render(HomeAtom.Ready(todo, doing, done))
+        // FIXME: This should be in HomeInteractor
+        view.render(HomeAtom.Ready(listOf(1, 2, 3)))
     }
 }
 
 sealed class HomeAtom {
-    data class Ready(val todo: List<KanbanCard>, val doing: List<KanbanCard>, val done: List<KanbanCard>) : HomeAtom()
+    class Ready(val stageIds: List<Int>) : HomeAtom()
 }
 
-data class KanbanCard(val title: String)
+

@@ -2,18 +2,21 @@ package bill.kanban.home
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.FragmentPagerAdapter
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import bill.kanban.R
 import bill.kanban.atomic.AtomicFragment
-import bill.kanban.ext.inflate
-import kotlinx.android.synthetic.main.home_card.view.*
+import bill.kanban.home.stages.StageFragment
 import kotlinx.android.synthetic.main.home_core.*
 import javax.inject.Inject
 
 class HomeFragment : AtomicFragment<HomeAtom>() {
 
     @Inject override lateinit var presenter: HomePresenter
+
+    private val stagesAdapter: StagesAdapter by lazy { StagesAdapter() }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -25,24 +28,29 @@ class HomeFragment : AtomicFragment<HomeAtom>() {
                               savedInstanceState: Bundle?) =
             inflater!!.inflate(R.layout.home_core, container, false)!!
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        stagesContainer.adapter = stagesAdapter
+    }
+
     override fun render(atom: HomeAtom) =
             when (atom) {
                 is HomeAtom.Ready -> renderReady(atom)
             }
 
     private fun renderReady(atom: HomeAtom.Ready) {
-        todoContainer.removeAllViews()
-        doingContainer.removeAllViews()
-        doneContainer.removeAllViews()
-
-        atom.todo.map { toLayout(it, todoContainer) }.forEach { todoContainer.addView(it) }
-        atom.doing.map { toLayout(it, doingContainer) }.forEach { doingContainer.addView(it) }
-        atom.done.map { toLayout(it, doneContainer) }.forEach { doneContainer.addView(it) }
+        stagesAdapter.stageIds = atom.stageIds
     }
 
-    private fun toLayout(card: KanbanCard, container: ViewGroup) =
-            inflate(R.layout.home_card, container, false).apply {
-                title.text = card.title
+    private inner class StagesAdapter : FragmentPagerAdapter(childFragmentManager) {
+        var stageIds = emptyList<Int>()
+            set(value) {
+                field = value
+                notifyDataSetChanged()
             }
 
+        override fun getCount() = stageIds.size
+        override fun getItem(position: Int) = StageFragment.newInstance(stageIds[position])
+    }
 }
+

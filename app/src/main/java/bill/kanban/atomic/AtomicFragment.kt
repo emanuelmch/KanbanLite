@@ -12,5 +12,10 @@ abstract class AtomicFragment<Atom> : Fragment(), AtomicView<Atom> {
         super.onViewCreated(view, savedInstanceState)
         presenter.onViewReady()
     }
+
+    override fun onDestroyView() {
+        presenter.onViewDestroy()
+        super.onDestroyView()
+    }
 }
 
