@@ -23,12 +23,12 @@ class HomeFragment : AtomicFragment<HomeAtom>() {
         HomeDependencies.setup(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?,
+    override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?) =
-            inflater!!.inflate(R.layout.home_core, container, false)!!
+            inflater.inflate(R.layout.home_core, container, false)!!
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         stagesContainer.adapter = stagesAdapter
     }

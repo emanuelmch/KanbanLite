@@ -8,7 +8,7 @@ abstract class AtomicFragment<Atom> : Fragment(), AtomicView<Atom> {
 
     abstract val presenter: AtomicPresenter<Atom>
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.onViewReady()
     }

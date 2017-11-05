@@ -30,18 +30,18 @@ class StageFragment : AtomicFragment<StageAtom>() {
     @Inject override lateinit var presenter: StagePresenter
     private val cardsAdapter by lazy { CardsAdapter() }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
-        val stageId = arguments.getInt(ARG_STAGE_ID)
+        val stageId = arguments!!.getInt(ARG_STAGE_ID)
         StageDependencies.setup(this, stageId)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?,
+    override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?) =
             inflater!!.inflate(R.layout.home_stage, container, false)!!
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cardsContainer.layoutManager = LinearLayoutManager(context)
         cardsContainer.adapter = cardsAdapter
