@@ -39,7 +39,7 @@ class StageFragment : AtomicFragment<StageAtom>() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?) =
-            inflater!!.inflate(R.layout.home_stage, container, false)!!
+            inflater.inflate(R.layout.home_stage, container, false)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

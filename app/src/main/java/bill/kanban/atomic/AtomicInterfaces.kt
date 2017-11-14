@@ -1,8 +1,8 @@
 package bill.kanban.atomic
 
 interface AtomicPresenter<Atom> {
-    fun onViewReady()
-    fun onViewDestroy() {}
+    fun attach(view: AtomicView<Atom>)
+    fun detach() {}
 }
 
 interface AtomicView<Atom> {

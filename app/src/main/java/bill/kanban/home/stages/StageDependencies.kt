@@ -12,7 +12,7 @@ object StageDependencies {
 
     fun setup(fragment: StageFragment, stageId: Int) {
         DaggerStageComponent.builder()
-                .stageModule(StageModule(fragment, stageId))
+                .stageModule(StageModule(stageId))
                 .build()
                 .inject(fragment)
     }
@@ -24,7 +24,6 @@ interface StageComponent {
 }
 
 @Module
-class StageModule(val fragment: StageFragment, val stageId: Int) {
-    @Provides fun stageView(): AtomicView<StageAtom> = fragment
+class StageModule(val stageId: Int) {
     @Provides @Named(StageDependencies.STAGE_ID) fun stageId() = stageId
 }

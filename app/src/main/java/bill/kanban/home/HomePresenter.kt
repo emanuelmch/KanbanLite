@@ -4,9 +4,9 @@ import bill.kanban.atomic.AtomicPresenter
 import bill.kanban.atomic.AtomicView
 import javax.inject.Inject
 
-class HomePresenter @Inject constructor(private val view: AtomicView<HomeAtom>) : AtomicPresenter<HomeAtom> {
+class HomePresenter @Inject constructor() : AtomicPresenter<HomeAtom> {
 
-    override fun onViewReady() {
+    override fun attach(view: AtomicView<HomeAtom>) {
         // FIXME: This should be in HomeInteractor
         view.render(HomeAtom.Ready(listOf(1, 2, 3)))
     }

@@ -8,15 +8,12 @@ import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 import javax.inject.Named
 
-class StagePresenter
-@Inject constructor(val view: AtomicView<StageAtom>,
-                    val interactor: StageInteractor,
-                    @Named(StageDependencies.STAGE_ID) val stageId: Int)
-    : AtomicPresenter<StageAtom> {
+class StagePresenter @Inject constructor(private val interactor: StageInteractor,
+                                         @Named(StageDependencies.STAGE_ID) private val stageId: Int) : AtomicPresenter<StageAtom> {
 
     private var disposable: Disposable? = null
 
-    override fun onViewReady() {
+    override fun attach(view: AtomicView<StageAtom>) {
         view.render(StageAtom.Loading())
         disposable = interactor.getKanbanStageById(stageId)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -24,7 +21,7 @@ class StagePresenter
                         onSuccess = { view.render(StageAtom.Ready(it)) })
     }
 
-    override fun onViewDestroy() {
+    override fun detach() {
         disposable?.dispose()
     }
 }
