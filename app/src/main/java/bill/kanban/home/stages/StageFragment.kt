@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import bill.kanban.atomic.AtomicFragment
 import bill.kanban.ext.inflate
 import kotlinx.android.synthetic.main.home_stage.*
 import kotlinx.android.synthetic.main.home_stage.view.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class StageFragment : AtomicFragment<StageAtom>() {
@@ -60,7 +60,7 @@ class StageFragment : AtomicFragment<StageAtom>() {
     }
 
     private fun renderError(error: Throwable) {
-        Log.e(StageFragment::class.simpleName, "Error on Loading", error)
+        Timber.e(error, "Error on Loading")
         this.title.text = error.message
         this.cardsAdapter.cards = emptyList()
     }
