@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import bill.kanban.R
 import bill.kanban.atomic.AtomicFragment
 import bill.kanban.ext.inflate
+import bill.kanban.ext.withArgument
 import kotlinx.android.synthetic.main.home_stage.*
 import kotlinx.android.synthetic.main.home_stage.view.*
 import timber.log.Timber
@@ -19,12 +20,8 @@ class StageFragment : AtomicFragment<StageAtom>() {
 
     companion object {
         private val ARG_STAGE_ID = "STAGE_ID"
-        fun newInstance(stageId: Int) =
-                StageFragment().apply {
-                    arguments = Bundle().apply {
-                        putInt(ARG_STAGE_ID, stageId)
-                    }
-                }
+        fun newInstance(stageId: Int) = StageFragment()
+                .withArgument(ARG_STAGE_ID, stageId)
     }
 
     @Inject override lateinit var presenter: StagePresenter
