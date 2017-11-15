@@ -1,4 +1,4 @@
-package bill.kanban.ext
+package bill.kanban.infra
 
 import android.os.Bundle
 import android.support.annotation.LayoutRes

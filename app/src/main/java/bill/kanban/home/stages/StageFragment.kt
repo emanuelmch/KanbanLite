@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import bill.kanban.R
 import bill.kanban.atomic.AtomicFragment
-import bill.kanban.ext.inflate
-import bill.kanban.ext.withArgument
+import bill.kanban.infra.inflate
+import bill.kanban.infra.withArgument
 import kotlinx.android.synthetic.main.home_stage.*
 import kotlinx.android.synthetic.main.home_stage.view.*
 import timber.log.Timber
