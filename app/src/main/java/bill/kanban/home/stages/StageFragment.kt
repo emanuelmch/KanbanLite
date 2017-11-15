@@ -81,7 +81,7 @@ class StageFragment : AtomicFragment<StageAtom>() {
         override fun getItemCount() = cards.size
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) =
-                CardViewHolder(inflate(R.layout.home_card, parent, false))
+                CardViewHolder(inflate(R.layout.home_card, parent))
 
         override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
             val card = cards[position]
