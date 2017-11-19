@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import bill.kanban.R
 import bill.kanban.atomic.AtomicFragment
-import bill.kanban.infra.inflate
+import bill.kanban.infra.ListBackedRecyclerAdapter
 import bill.kanban.infra.withArgument
 import kotlinx.android.synthetic.main.home_stage.*
 import kotlinx.android.synthetic.main.home_stage.view.*
@@ -67,22 +67,21 @@ class StageFragment : AtomicFragment<StageAtom>() {
         this.cardsAdapter.cards = stage.cards
     }
 
-    inner class CardsAdapter : RecyclerView.Adapter<CardViewHolder>() {
+    inner class CardsAdapter : ListBackedRecyclerAdapter<KanbanCard, CardViewHolder>(context) {
 
-        var cards = emptyList<KanbanCard>()
+        override val layoutResource = R.layout.home_card
+
+        var cards
+            get() = items
             set(value) {
-                field = value
-                notifyDataSetChanged()
+                items = value
             }
 
-        override fun getItemCount() = cards.size
+        override fun createViewHolder(item: View)
+                = CardViewHolder(item)
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) =
-                CardViewHolder(inflate(R.layout.home_card, parent))
-
-        override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-            val card = cards[position]
-            card.title.let { holder.itemView.title.text = it }
+        override fun bindViewHolder(holder: CardViewHolder, item: KanbanCard) {
+            item.title.let { holder.itemView.title.text = it }
         }
     }
 
