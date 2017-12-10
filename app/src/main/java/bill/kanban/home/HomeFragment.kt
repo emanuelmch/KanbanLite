@@ -12,7 +12,7 @@ import bill.kanban.home.stages.StageFragment
 import kotlinx.android.synthetic.main.home_core.*
 import javax.inject.Inject
 
-class HomeFragment : AtomicFragment<HomeAtom>() {
+class HomeFragment : AtomicFragment<HomeAtom, HomeAction>() {
 
     @Inject override lateinit var presenter: HomePresenter
 
@@ -35,11 +35,21 @@ class HomeFragment : AtomicFragment<HomeAtom>() {
 
     override fun render(atom: HomeAtom) =
             when (atom) {
-                is HomeAtom.Ready -> renderReady(atom)
+                is HomeAtom.Loading -> renderLoading()
+                is HomeAtom.Empty -> renderEmpty()
+                is HomeAtom.Ready -> renderReady(atom.stageIds)
             }
 
-    private fun renderReady(atom: HomeAtom.Ready) {
-        stagesAdapter.stageIds = atom.stageIds
+    private fun renderLoading() {
+        // TODO("not implemented")
+    }
+
+    private fun renderEmpty() {
+        // TODO("not implemented")
+    }
+
+    private fun renderReady(stages: List<Int>) {
+        stagesAdapter.stageIds = stages
     }
 
     private inner class StagesAdapter : FragmentPagerAdapter(childFragmentManager) {

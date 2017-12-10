@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.home_stage.view.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class StageFragment : AtomicFragment<StageAtom>() {
+class StageFragment : AtomicFragment<StageAtom, StageAction>() {
 
     companion object {
         private val ARG_STAGE_ID = "STAGE_ID"
