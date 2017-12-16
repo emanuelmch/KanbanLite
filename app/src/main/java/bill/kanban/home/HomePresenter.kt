@@ -4,8 +4,10 @@ import bill.kanban.atomic.AtomicPresenter
 import bill.kanban.atomic.AtomicView
 import bill.kanban.infra.disposeWith
 import bill.kanban.infra.observeOnMainThread
+import bill.kanban.infra.subscribeOnComputationThread
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class HomePresenter @Inject constructor(private val interactor: HomeInteractor) : AtomicPresenter<HomeAtom, HomeAction>() {
@@ -37,7 +39,7 @@ class HomePresenter @Inject constructor(private val interactor: HomeInteractor) 
 }
 
 class HomeInteractor @Inject constructor() {
-    fun loadStages() = Observable.just(listOf(1, 2, 3))!!
+    fun loadStages() = Observable.timer(3, TimeUnit.SECONDS).map { listOf(1, 2, 3) }.subscribeOnComputationThread()
 }
 
 sealed class HomeAction {
