@@ -11,6 +11,8 @@ fun Disposable.disposeWith(disposable: CompositeDisposable) {
     disposable.add(this)
 }
 
+fun <T> T.asSingle(): Single<T> = Single.just(this)
+
 fun <T> Single<T>.observeOnMainThread() = this.observeOn(AndroidSchedulers.mainThread())!!
 
 fun <T> Observable<T>.subscribeOnComputationThread() = this.subscribeOn(Schedulers.computation())!!

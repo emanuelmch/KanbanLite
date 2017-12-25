@@ -1,6 +1,6 @@
 package bill.kanban.home.stages
 
-import io.reactivex.rxkotlin.toSingle
+import bill.kanban.infra.asSingle
 import javax.inject.Inject
 
 class StageInteractor @Inject constructor() {
@@ -11,5 +11,5 @@ class StageInteractor @Inject constructor() {
                 2 -> KanbanStage("Doing", listOf(KanbanCard("Doing 1")))
                 3 -> KanbanStage("Done", listOf(KanbanCard("Done 1"), KanbanCard("Done 2"), KanbanCard("Done 3")))
                 else -> throw IllegalArgumentException("Unknown StageId $stageId")
-            }.toSingle()
+            }.asSingle()
 }

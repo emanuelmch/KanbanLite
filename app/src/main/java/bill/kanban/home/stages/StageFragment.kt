@@ -67,7 +67,7 @@ class StageFragment : AtomicFragment<StageAtom, StageAction>() {
         this.cardsAdapter.cards = stage.cards
     }
 
-    inner class CardsAdapter : ListBackedRecyclerAdapter<KanbanCard, CardViewHolder>(context) {
+    inner class CardsAdapter : ListBackedRecyclerAdapter<KanbanCard, CardViewHolder>(context!!) {
 
         override val layoutResource = R.layout.home_card
 
